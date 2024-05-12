@@ -1,47 +1,44 @@
-import random
-print('''
-                   ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░░▒▓███████▓▒░▒▓███████▓▒░                
-                  ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░     ░▒▓█▓▒░                       
-                  ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░     ░▒▓█▓▒░                       
-                  ░▒▓█▓▒▒▓███▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓██████▓▒░  ░▒▓██████▓▒░░▒▓██████▓▒░                 
-                  ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░     ░▒▓█▓▒░                
-                  ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░     ░▒▓█▓▒░                
-                   ░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓████████▓▒░▒▓███████▓▒░▒▓███████▓▒░                 
-                                                                                                   
-                                                                                                   
-                              ░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░                             
-                                 ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░                                    
-                                 ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░                                    
-                                 ░▒▓█▓▒░   ░▒▓████████▓▒░▒▓██████▓▒░                               
-                                 ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░                                    
-                                 ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░                                    
-                                 ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░                             
-                                                                                                   
-                                                                                                   
-            ░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓██████████████▓▒░░▒▓███████▓▒░░▒▓████████▓▒░▒▓███████▓▒░  
-            ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
-            ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
-            ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░░▒▓██████▓▒░ ░▒▓███████▓▒░  
-            ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
-            ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
-            ░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░ 
-                                                                                                   
-                                                                                                   
-''')
-def number_guessing_game():
-    number_to_guess = random.randint(1,100)
-    guess_count = 0
+from random import randint
+from art import logo
+EASY_LEVEL = 10
+HARD_LEVEL = 5
 
-    while True:
-        user_guess = int(input("Guess a number between 1 and 100:"))
-        guess_count += 1
+def check_answer(guess, answer, turns):
+  if guess > answer:
+    print("Too high.")
+    return turns - 1
+  elif guess < answer:
+    print("Too low.")
+    return turns - 1
+  else:
+    print(f"You got it in {guess}! The answer was {answer}.")
+def set_difficulty():
+  level = input("Choose a difficulty. Type 'easy' or 'hard': ")
+  if level == "easy":
+    return EASY_LEVEL
+  else:
+    return HARD_LEVEL
 
-        if user_guess < number_to_guess:
-            print("Guess a larger number")
-        elif user_guess > number_to_guess:
-            print("Guess a smaller number")
-        else:
-            print(f"Congratulations! You guessed correctly in {guess_count} attempts.")
-            break
+def game():
+  print(logo)
+  print("Welcome to the Number Guessing Game!")
+  print("I'm thinking of a number between 1 and 100. Can you guess it ? ;)")
+  answer = randint(1, 100)
 
-number_guessing_game()
+  turns = set_difficulty()
+  guess = 0
+  while guess != answer:
+    print(f"You have {turns} attempts remaining to guess the number.")
+
+    guess = int(input("Make a guess: "))
+
+    turns = check_answer(guess, answer, turns)
+    if turns == 0:
+      print("You've run out of guesses, you lose.")
+      return
+    elif guess != answer:
+      print("Guess again.")
+
+
+game()
+
